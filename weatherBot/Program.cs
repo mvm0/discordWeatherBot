@@ -40,11 +40,11 @@ namespace testDiscordBot
         {
             if (!msg.Author.IsBot && msg.Content[0].ToString() == "!")
             {
-                Console.WriteLine("Принято сообщение");
+                Console.WriteLine("Received message");
                 string tempMessage = System.Text.RegularExpressions.Regex.Replace(msg.Content.Trim(), @"\s+", " ");
                 if (tempMessage.Split().Length == 2)
                 {
-                    if (tempMessage.Split()[0] == "!погода")
+                    if (tempMessage.Split()[0] == "!weather")
                     {
 
                         string url = $"http://api.weatherapi.com/v1/current.json?key={weatherKey}&q={tempMessage.Split()[1]}";
@@ -124,18 +124,18 @@ namespace testDiscordBot
 
                             }
 
-                            msg.Channel.SendMessageAsync($"Населенный пункт: *{name}* {weatherStatus}" +
-                            $"\nВремя в населенном пункте: *{localtime.ToString().Split()[1]}*" +
-                            $"\nТекущая температура: *{temp_c}°*" +
-                            $"\nОщущается как: *{feelslike_c}°*");
-                            Console.WriteLine("Отправлено сообщение");
+                            msg.Channel.SendMessageAsync($"Location: *{name}* {weatherStatus}" +
+                            $"\nLocal time: *{localtime.ToString().Split()[1]}*" +
+                            $"\nCurrent temperature: *{temp_c}°*" +
+                            $"\nFeeks like: *{feelslike_c}°*");
+                            Console.WriteLine("Sent message");
                         }
                     }
                 }
                 else
                 {
-                    msg.Channel.SendMessageAsync("Введите город (!погода *город*)");
-                    Console.WriteLine("Отправлено сообщение");
+                    msg.Channel.SendMessageAsync("Enter location (!weather *place*)");
+                    Console.WriteLine("Sent message");
                 }
             }
             return Task.CompletedTask;
